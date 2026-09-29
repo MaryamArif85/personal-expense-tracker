@@ -2,7 +2,7 @@
 
 A modern, responsive Personal Expense Tracker built with Flask and Firebase Firestore. Track daily spending, manage transactions, and monitor your budget in real-time.
 
-**Live Demo:** `YOUR-VERCEL-LINK-HERE` (replace after deploy)
+**Live Demo:** `https://personal-expense-tracker-theta-ruddy.vercel.app/
 **Project ID:** personal-expense-tracker-539bf
 
 ### ✨ Features
