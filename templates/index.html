@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Manage Your Finances</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h2>💰 ExpenseTracker</h2>
+            <span class="badge">Personal Finance</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">Total Expenses</p>
+                <h2 class="stat-value" id="totalCount">0</h2>
+                <p class="stat-sub">Transactions</p>
+            </div>
+            <div class="stat-card primary">
+                <p class="stat-label">Total Spent</p>
+                <h2 class="stat-value" id="totalAmount">Rs. 0</h2>
+                <p class="stat-sub">This month</p>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <!-- Form -->
+            <div class="card form-card">
+                <div class="card-header">
+                    <h3>Add Expense</h3>
+                    <p>Track your daily spending</p>
+                </div>
+                <form id="expenseForm">
+                    <div class="input-group">
+                        <label>Expense Title</label>
+                        <input type="text" id="title" placeholder="e.g., Lunch at office" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-group">
+                            <label>Amount (Rs.)</label>
+                            <input type="number" id="amount" placeholder="0.00" min="1" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Category</label>
+                            <select id="category" required>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="Food">🍔 Food</option>
+                                <option value="Travel">✈️ Travel</option>
+                                <option value="Shopping">🛍️ Shopping</option>
+                                <option value="Bills">💡 Bills</option>
+                                <option value="Other">📦 Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <span>+</span> Add Expense
+                    </button>
+                </form>
+            </div>
+
+            <!-- Table -->
+            <div class="card table-card">
+                <div class="card-header">
+                    <h3>Recent Expenses</h3>
+                    <p>Your spending history</p>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTable">
+                            <tr><td colspan="5" class="empty">No expenses yet. Add one!</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
