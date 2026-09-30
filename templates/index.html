@@ -1,103 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker | Manage Your Finances</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExpenseTracker - Personal Daily Expense Manager</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <h2>💰 ExpenseTracker</h2>
-            <span class="badge">Personal Finance</span>
-        </div>
-    </nav>
+<div class="header" id="mainHeader" style="display:none;">
+  <div class="logo"><div class="logo-icon">💼</div><div><h2>ExpenseTracker</h2><p>Personal Daily Expense Manager</p></div></div>
+  <div class="user-area"><span id="userLabel">Guest User</span><button id="logoutBtn" class="signout">Sign Out</button></div>
+</div>
 
-    <div class="container">
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <p class="stat-label">Total Expenses</p>
-                <h2 class="stat-value" id="totalCount">0</h2>
-                <p class="stat-sub">Transactions</p>
-            </div>
-            <div class="stat-card primary">
-                <p class="stat-label">Total Spent</p>
-                <h2 class="stat-value" id="totalAmount">Rs. 0</h2>
-                <p class="stat-sub">This month</p>
-            </div>
-        </div>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="lock-icon">🔒</div>
+    <h1>Sign In Required</h1>
+    <p>Sign in with your Google Account to unlock and manage your daily expenses.</p>
+    <button id="loginBtn" class="google-btn"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20"> Sign in with Google</button>
+    <a id="guestBtn" class="guest-link">Continue as Guest (Demo Mode)</a>
+  </div>
+</div>
 
-        <div class="main-grid">
-            <!-- Form -->
-            <div class="card form-card">
-                <div class="card-header">
-                    <h3>Add Expense</h3>
-                    <p>Track your daily spending</p>
-                </div>
-                <form id="expenseForm">
-                    <div class="input-group">
-                        <label>Expense Title</label>
-                        <input type="text" id="title" placeholder="e.g., Lunch at office" required>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="input-group">
-                            <label>Amount (Rs.)</label>
-                            <input type="number" id="amount" placeholder="0.00" min="1" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Category</label>
-                            <select id="category" required>
-                                <option value="" disabled selected>Choose</option>
-                                <option value="Food">🍔 Food</option>
-                                <option value="Travel">✈️ Travel</option>
-                                <option value="Shopping">🛍️ Shopping</option>
-                                <option value="Bills">💡 Bills</option>
-                                <option value="Other">📦 Other</option>
-                            </select>
-                        </div>
-                    </div>
+<div id="appScreen" class="container" style="display:none;">
+  <div class="stat-card"><div><small>TOTAL EXPENSES</small><h1 id="totalCount">0</h1></div><span class="stat-icon">☰</span></div>
+  <div class="stat-card"><div><small>TOTAL AMOUNT SPENT</small><h1 id="totalAmount" class="green">PKR 0.00</h1></div><span class="stat-icon green">💵</span></div>
 
-                    <div class="input-group">
-                        <label>Date</label>
-                        <input type="date" id="date" required>
-                    </div>
+  <div class="card">
+    <h3>Add New Expense</h3>
+    <form id="expenseForm">
+      <label>Expense Title<input type="text" id="title" placeholder="e.g. Grocery" required></label>
+      <label>Amount (PKR)<input type="number" id="amount" placeholder="0.00" required></label>
+      <label>Category<select id="category" required><option value="">Choose</option><option>Food</option><option>Travel</option><option>Shopping</option><option>Bills</option><option>Other</option></select></label>
+      <label>Date<input type="date" id="date" required></label>
+      <button type="submit" class="add-btn">+ Add Expense</button>
+    </form>
+  </div>
 
-                    <button type="submit" class="btn-primary">
-                        <span>+</span> Add Expense
-                    </button>
-                </form>
-            </div>
+  <div class="card table-card">
+    <table>
+      <thead><tr><th>TITLE</th><th>CATEGORY</th><th>DATE</th><th>AMOUNT</th><th>ACTION</th></tr></thead>
+      <tbody id="expenseTableBody"></tbody>
+    </table>
+    <p id="emptyMsg" class="empty">No expenses found. Add your first expense!</p>
+  </div>
+</div>
 
-            <!-- Table -->
-            <div class="card table-card">
-                <div class="card-header">
-                    <h3>Recent Expenses</h3>
-                    <p>Your spending history</p>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Amount</th>
-                                <th>Category</th>
-                                <th>Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="expenseTable">
-                            <tr><td colspan="5" class="empty">No expenses yet. Add one!</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="module" src="{{ url_for('static', filename='script.js') }}"></script>
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
